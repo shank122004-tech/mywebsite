@@ -99,6 +99,8 @@ document.querySelectorAll(".idea-title").forEach(title=>{
   });
 });
 </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9760341979694324"
+     crossorigin="anonymous"></script>
 
 </body>
 </html>
