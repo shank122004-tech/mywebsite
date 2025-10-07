@@ -3,191 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Premium Game Portal</title>
+<title>Cheapest Products List — Diwali Sale</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-/* Reset */
-body,html{margin:0;padding:0;font-family:Arial,sans-serif;background:#111;color:#fff;overflow-x:hidden;}
-a{text-decoration:none;color:#fff;}
-h1,h2,h3{margin:0;padding:0;}
-
-/* Header */
-header{background:#1a1a1a;padding:20px;text-align:center;position:relative;box-shadow:0 5px 10px rgba(0,0,0,0.5);}
-header h1{font-size:36px;margin-bottom:10px;}
-header input[type="text"]{padding:10px;width:300px;border-radius:5px;border:none;font-size:16px;}
-
-/* Hero Section */
-.hero{background:linear-gradient(120deg,#0077ff,#00ff88);height:300px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:bold;text-shadow:2px 2px 10px #000;margin-bottom:20px;border-radius:15px 15px 0 0;}
-
-/* Ads */
-#ad-top,#ad-bottom{background:#333;text-align:center;padding:20px;margin:10px;font-size:20px;color:#fff;border-radius:10px;}
-#ad-left,#ad-right{position:fixed;top:0;width:14px;height:100%;display:flex;flex-direction:column;justify-content:space-between;gap:10px;z-index:10;}
-.side-ad{flex:1;background:#333;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:5px;margin:5px 0;}
-
-/* Featured Carousel */
-#featured-container{position:relative;overflow:hidden;margin:20px;border-radius:10px;}
-#featured{display:flex;transition:transform 0.5s ease;}
-.featured-card{min-width:250px;background:#222;border-radius:10px;margin-right:15px;text-align:center;padding:10px;box-shadow:0 4px 10px rgba(0,0,0,0.5);transition:transform 0.3s;}
-.featured-card:hover{transform:scale(1.05);}
-.featured-card img{width:100%;height:150px;object-fit:cover;border-radius:10px;}
-.featured-card h3{margin-top:10px;font-size:18px;}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;background:rgba(0,0,0,0.5);border:none;color:#fff;width:45px;height:45px;border-radius:50%;cursor:pointer;}
-.arrow:hover{background:rgba(0,0,0,0.8);}
-#arrow-left{left:10px;}#arrow-right{right:10px;}
-
-/* Categories Tabs */
-#categories{display:flex;justify-content:center;gap:15px;margin:20px;}
-.category-btn{padding:10px 20px;background:#222;border:none;border-radius:5px;cursor:pointer;transition:0.3s;}
-.category-btn:hover,.category-btn.active{background:#0077ff;}
-
-/* Game Grid */
-#games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:20px;}
-.game-card{background:#222;border-radius:10px;overflow:hidden;text-align:center;transition:transform 0.3s;box-shadow:0 4px 10px rgba(0,0,0,0.5);}
-.game-card:hover{transform:scale(1.05);}
-.game-card img{width:100%;height:150px;object-fit:cover;}
-.game-card h3{margin:10px;font-size:18px;}
-.game-card button{margin-bottom:10px;padding:8px 15px;background:#0077ff;border:none;border-radius:5px;cursor:pointer;color:#fff;transition:0.3s;}
-.game-card button:hover{background:#005fcc;}
-
-/* Modal */
-#gameModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;z-index:1000;flex-direction:column;}
-#gameModal iframe{width:90%;height:80%;border:none;border-radius:10px;margin-top:20px;}
-#modalClose{position:absolute;top:20px;right:20px;font-size:40px;cursor:pointer;color:#fff;}
-
-/* Footer */
-footer{background:#1a1a1a;padding:20px;text-align:center;margin-top:20px;font-size:16px;color:#bbb;}
+:root {
+  --gold: #d4af37;
+  --gold-2: #ffb84d;
+  --bg-1: #0f1724;
+  --bg-2: #0b1020;
+}
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #e9eef6;
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  overflow-x: hidden;
+}
+.site-header { position: sticky; top: 0; z-index: 60; background: linear-gradient(90deg, rgba(4,10,20,0.6), rgba(4,10,20,0.35)); border-bottom: 1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px);}
+.brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.brand-badge { width: 46px; height:46px; border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
+.cat-btn { padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.03); color: #e8eef6; font-weight: 600; cursor: pointer; transition: all .2s; }
+.cat-btn.active { background: rgba(212,175,55,0.12); color: var(--gold); box-shadow: 0 6px 20px rgba(212,175,55,0.06); }
+.product-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.04); border-radius: 14px; overflow: hidden; transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; display:flex; flex-direction:column; }
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(2,6,23,0.5); }
+.product-image img { width: 100%; height: 180px; object-fit: cover; border-radius:10px; }
+.social-btn, .buy-btn { padding: 6px 10px; border-radius: 8px; color: #fff; font-weight: 700; font-size: 13px; text-decoration:none; text-align:center; flex:1; margin-top:4px; display:inline-block; }
+.buy-btn { background:#ff5722; } .buy-btn:hover { background:#ff784e; }
+footer { max-width:1100px; margin:40px auto; padding:18px; color:#b6c1cf; font-size:14px; border-top:1px solid rgba(255,255,255,0.03); text-align:center; }
+.floating-diwali { position: fixed; width: 40px; height: 40px; animation: floatUp 6s linear infinite; z-index:30; }
+@keyframes floatUp { 0% { transform: translateY(100px) rotate(0deg); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-200px) rotate(360deg); opacity: 0; } }
+.banner-slider { position: relative; overflow: hidden; max-width: 1100px; margin: 20px auto; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+.banner-track { display: flex; transition: transform 0.5s ease-in-out; }
+.banner-track img { width: 100%; max-height:220px; object-fit: cover; border-radius:14px; flex-shrink:0; }
+@media(max-width:768px){ .home-btn { width:100%; margin-left:0; margin-top:6px; } .cat-btn { font-size:12px; padding:6px 10px; } .product-image img { height:150px; } }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9760341979694324"
-     crossorigin="anonymous"></script>
-     <script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var a=window,i="cc161206d3dc9aeaeb06293aa4e492ec",h=[["siteId",764-412-276-479-433+5239043],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],k=["d3d3LmludGVsbGlwb3B1cC5jb20vc3Zqcy12aWRlby5taW4uY3Nz","ZDNtcjd5MTU0ZDJxZzUuY2xvdWRmcm9udC5uZXQveC9xU2xpbS5taW4uanM="],f=-1,p,o,s=function(){clearTimeout(o);f++;if(k[f]&&!(1785225311000<(new Date).getTime()&&1<f)){p=a.document.createElement("script");p.type="text/javascript";p.async=!0;var e=a.document.getElementsByTagName("script")[0];p.src="https://"+atob(k[f]);p.crossOrigin="anonymous";p.onerror=s;p.onload=function(){clearTimeout(o);a[i.slice(0,16)+i.slice(0,16)]||s()};o=setTimeout(s,5E3);e.parentNode.insertBefore(p,e)}};if(!a[i]){try{Object.freeze(a[i]=h)}catch(e){}s()}})();
-/*]]>/* */
-</script>
-     <script async="async" data-cfasync="false" src="//pl27788340.revenuecpmgate.com/65971f1b5d75c6e6bd1961d730878803/invoke.js"></script>
-<div id="container-65971f1b5d75c6e6bd1961d730878803"></div>
-
 </head>
 <body>
-     <script async="async" data-cfasync="false" src="//pl27788340.revenuecpmgate.com/65971f1b5d75c6e6bd1961d730878803/invoke.js"></script>
-<div id="container-65971f1b5d75c6e6bd1961d730878803"></div>
 
-<header>
-<h1>Ultimate Premium Game Portal</h1>
-<input type="text" id="search" placeholder="Search games...">
+<!-- Floating diyas -->
+<img src="https://i.postimg.cc/QM0Hq9G7/diya.png" class="floating-diwali" style="left:10%; animation-delay:0s;">
+<img src="https://i.postimg.cc/QM0Hq9G7/diya.png" class="floating-diwali" style="left:30%; animation-delay:1.5s;">
+<img src="https://i.postimg.cc/QM0Hq9G7/diya.png" class="floating-diwali" style="left:50%; animation-delay:0.7s;">
+<img src="https://i.postimg.cc/QM0Hq9G7/diya.png" class="floating-diwali" style="left:70%; animation-delay:2s;">
+<img src="https://i.postimg.cc/QM0Hq9G7/diya.png" class="floating-diwali" style="left:90%; animation-delay:1s;">
+
+<header class="site-header">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+    <div class="brand">
+      <div class="brand-badge"><img src="https://via.placeholder.com/46x46.png?text=Logo" alt="Logo" style="width:100%;height:100%;object-fit:contain;"></div>
+      <div><div style="font-weight:800; font-size:18px;">Cheapest Products List</div>
+      <div style="font-size:12px; color:#b9c4d6;">Premium Affiliate Collection</div></div>
+      <button class="home-btn" onclick="scrollToTop()">Home</button>
+    </div>
+    <div style="flex:1; margin-left:18px;">
+      <input id="searchInput" class="w-full rounded-full px-4 py-2 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.03)] placeholder:text-slate-400" placeholder="Search products" />
+    </div>
+  </div>
+  <nav style="max-width:1100px; margin:8px auto 0; padding:10px 16px; display:flex; gap:8px; overflow:auto;">
+    <button class="cat-btn active" data-cat="all">All</button>
+    <button class="cat-btn" data-cat="mens-fashion">Men's</button>
+    <button class="cat-btn" data-cat="home-kitchen">Home & Kitchen</button>
+    <button class="cat-btn" data-cat="diwali-items">Diwali Items</button>
+  </nav>
 </header>
 
-<div class="hero">🎮 Play 50+ Awesome Games! 🎮</div>
+<!-- Banner Carousel -->
+<section class="banner-slider" id="bannerSlider">
+  <div class="banner-track" id="bannerTrack">
+    <img src="https://img.freepik.com/free-vector/happy-diwali-red-banner-with-text-space_1017-28648.jpg" alt="Banner1">
+    <img src="https://static.vecteezy.com/system/resources/previews/000/676/099/non_2x/vector-happy-diwali-modern-banner-design.jpg" alt="Banner2">
+    <img src="https://img.freepik.com/free-vector/decorative-happy-diwali-banner-with-hanging-lights-diya_1017-34335.jpg" alt="Banner3">
+  </div>
+</section>
 
-<div id="ad-top">Ad Banner Top</div>
-<div id="ad-left">
-  <div class="side-ad">Ad Left Top</div>
-  <div class="side-ad">Ad Left Bottom</div>
-</div>
-<div id="ad-right">
-  <div class="side-ad">Ad Right Top</div>
-  <div class="side-ad">Ad Right Bottom</div>
-</div>
+<main class="max-w-6xl mx-auto px-4 py-8">
+  <section id="product-list" class="grid gap-6 mt-8" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));"></section>
+</main>
 
-<div id="featured-container">
-<button class="arrow" id="arrow-left">&#10094;</button>
-<div id="featured"></div>
-<button class="arrow" id="arrow-right">&#10095;</button>
-</div>
-
-<div id="categories"></div>
-<div id="games"></div>
-<div id="ad-bottom">Ad Banner Bottom</div>
-
-<div id="gameModal">
-<span id="modalClose">&#10006;</span>
-<iframe id="gameFrame"></iframe>
-</div>
-
-<footer>© 2025 Ultimate Premium Game Portal | All Rights Reserved</footer>
+<footer>
+&copy; 2025 <strong>Cheapest Products List</strong>. All rights reserved. |
+<a href="#" style="color:var(--gold)">Terms</a> |
+<a href="#" style="color:var(--gold)">Privacy</a> |
+<a href="#" style="color:var(--gold)">Contact</a>
+</footer>
 
 <script>
-// Sample 50 games
-const categories = ['All','Action','Puzzle','Racing','Arcade','Multiplayer'];
-const games = Array.from({length:50},(_,i)=>({
-  title:`Game ${i+1}`,
-  thumbnail:`https://via.placeholder.com/250x150?text=Game+${i+1}`,
-  file:`games/game${i+1}.html`,
-  category: categories[i%5+1]
-}));
+// Scroll top
+function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 
-// Featured games (first 5)
-const featured = games.slice(0,5);
-const featuredContainer = document.getElementById("featured");
-let featuredIndex = 0;
+// Products (use placeholders, add as many as you want)
+const products = [
+  {id:1,name:"Casual Sneaker Shoes for Men",price:"₹1779",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/p/q/-original-imahan4cwysb4vgy.jpeg?q=70",buyLink:"https://fktr.in/d11uUQy",instagramLink:"#",category:"mens-fashion"},
+  {id:2,name:"Casual Cuffed Sleeves Printed Women Multicolor Top",price:"₹399",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/top/r/3/r/l-1-mi-printed-03-purple-mirana-original-imah7svhv3mnu4ar.jpeg?q=70",buyLink:"https://fktr.in/3yldvd0",instagramLink:"#",category:"womens-fashion"},
+  {id:3,name:"cutlery kitchen rack steel shelf",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/kitchen-rack/s/m/l/kitchen-shelf-stainless-steel-wall-mount-knife-holder-kitchen-original-imahfe5pjt8scgv5.jpeg?q=70",buyLink:"https://fktr.in/WY4qpOh",instagramLink:"#",category:"home-kitchen"},
+  {id:4,name:"CraftVatika Red Rose Wall Hanging Candle Holder Latkan Toran Set | Diwali Decor (4 Pc) Resin 4 - Cup Tealight Holder  (Multicolor, Pack of 4)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle-tealight-holder/a/c/p/5-11-4-ltkn124-2-set-craftvatika-3-54-original-imahetfmenhywcx6.jpeg?q=70",buyLink:"#",instagramLink:"#",category:"diwali-items"},
+  {id:5,name:"Fashion Bizz Silver Clear Crystal Tea Light Candle Holder Diwali / Chirstmas Home Decoration Gift Item/Home Decor Item Iron 1 - Cup Tealight Holder  (Silver, Pack of 1)",price:"₹149",img:"https://rukminim2.flixcart.com/image/612/612/kf2v3ww0/candle-tealight-holder/g/k/3/siltl-01-fashion-bizz-original-imafvmgtg2pegvvg.jpeg?q=70",buyLink:"https://fktr.in/bus67ya",instagramLink:"#",category:"diwali-items"},
+  {id:6,name:"MAA BHAWANI HANDICRAFTS Boat Table Decor Showpiece Decorative Showpiece - 25 cm  (Metal, Gold, Blue)",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/t/h/j/25-35-sailing-boat-table-decor-showpiece-gift-items-for-home-original-imahfrgehgngdpuq.jpeg?q=70",buyLink:"https://fktr.in/2cbXlEn",instagramLink:"#",category:"diwali-items"},
+  // ----------------- Men's Fashion -----------------
+  {id:1,name:"mens shoes",price:"₹941",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/r/4/k/-original-imahdh5gee9bzdzk.jpeg?q=70",buyLink:"https://fktr.in/b3K2by5",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:2,name:"casual t-shirt for men",price:"₹259",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/j/t/r/l-zip-tst-01-imsa-moda-original-imah8ypm6afrtuma.jpeg?q=70",buyLink:"https://fktr.in/R14b7aP",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:3,name:"t-shirt for mens",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/d/d/h/l-polo-8041-kajaru-original-imahdsajqefgavwa.jpeg?q=70",buyLink:"https://fktr.in/US41P83",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:4,name:"Men's Jacket 4",price:"₹399",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-shirt/u/c/v/s-gent-454-bllack-lime-original-imahyfpefymjyys6.jpeg?q=70",buyLink:"https://fktr.in/Xc55Rtu",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:5,name:"Men's Hoodie 5",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/7/o/3/xxl-ug-s-s-hlaf-04-ugamcreations-original-imahdbk9cngqyefw.jpeg?q=70",buyLink:"https://fktr.in/yI165nX",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:6,name:"Men's Shorts 6",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/y/8/2/m-polo-8016-kajaru-original-imahfyga4vfrh7jx.jpeg?q=70",buyLink:"https://fktr.in/6KGWsHC",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:7,name:"Men's T-Shirt 7",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/a/s/d/s-men-printed-floral-print-latest-design-lycra-cut-away-collar-original-imagqdyprsg3nrdt.jpeg?q=70",buyLink:"https://fktr.in/3Gajc6O",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:8,name:"Men's Shirt 8",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/4/8/i/xl-flos018-navy-flyind-vogue-outfit-original-imahd83qfvy6h2pq.jpeg?q=70",buyLink:"https://fktr.in/x7A89V5",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:9,name:"Men's Jeans 9",price:"₹939",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/trouser/b/i/7/30-lintsr-1024-016-color-hunt-original-imah82h8uxkxwpxx.jpeg?q=70",buyLink:"https://placeholder.com",productLink:"https://fktr.in/avj70TZ",category:"mens-fashion"},
+  {id:10,name:"Men's Jacket 10",price:"₹978",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/kurta/n/j/h/l-30519051-house-of-pataudi-original-imahehw9zhuwugav.jpeg?q=70",buyLink:"https://fktr.in/2fitClf",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:11,name:"Men's Hoodie 11",price:"₹974",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/z/v/f/s-110156574egret-7-alt-by-pantaloons-original-imah62hdxfky5j5p.jpeg?q=70",buyLink:"https://placeholder.com",productLink:"https://fktr.in/e0Tz31w",category:"mens-fashion"},
+  {id:12,name:"Men's Shorts 12",price:"₹450",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/g/o/1/xxl-flin-os115-houseofcommon-original-imahdufpdgjmegep.jpeg?q=70",buyLink:"https://fktr.in/w3O92GN",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:13,name:"Men's T-Shirt 13",price:"₹499",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/kurta/k/h/z/xl-kfn173-342-diwas-by-manyavar-original-imah93fscuefwgx6.jpeg?q=70",buyLink:"https://fktr.in/oucsrE4",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:14,name:"Men's Shirt 14",price:"₹379",img:"https://m.media-amazon.com/images/I/71kE75JMKjL._AC_UL480_FMwebp_QL65_.jpg",buyLink:"https://placeholder.com",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:15,name:"Men Solid Polo Neck Pure Cotton Black T-Shirt",price:"₹799",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/i/4/p/m-68709301-puma-original-imahcm8bnjvzszvu.jpeg?q=70",buyLink:"https://fktr.in/8letuEf",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:16,name:"Pack of 2 Men Checkered Polo Neck Cotton Blend Multicolor T-Shirt",price:"448",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/y/p/8/4xl-ausk0578-579-ausk-original-imahbq3g2rftzgqg.jpeg?q=70",buyLink:"https://fktr.in/GlaSGhs",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:17,name:"Pack of 2 Solid Men Black, Dark Grey Casual Shorts",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/short/k/m/d/6xl-ic-n24446-indiclub-original-imagbvzvuvdsywtr-bb.jpeg?q=70",buyLink:"https://fktr.in/yF0ffqz",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:18,name:"Men Checkered Polo Neck Cotton Blend Black, Grey T-Shirt",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/l/0/9/4xl-askn0956-ausk-original-imahd7hfj9ufmssf.jpeg?q=70",buyLink:"https://fktr.in/xQGDAmz",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:19,name:"Men Regular Fit Checkered Casual Shirt",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/w/a/f/l-pk21sh09g-surhi-original-imah398aughuram5.jpeg?q=70",buyLink:"https://fktr.in/GmuopSA",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:20,name:"Men Regular Fit Solid Spread Collar Casual Shirt",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/b/c/e/2xl-met-shirt1401-metronaut-original-imahg72mjqkckzwz.jpeg?q=70",buyLink:"https://fktr.in/JJmPfZo",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:21,name:"mens shirt",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/q/v/a/l-ausk01564-ausk-original-imahcyry3dmvn7cj.jpeg?q=70",buyLink:"https://fktr.in/OW4Tq0x",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:22,name:"Men Regular Fit Solid Spread Collar Casual Shirt",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/7/7/6/s-st2-vebnor-original-imahekf5guf9jzar.jpeg?q=70",buyLink:"https://fktr.in/e5NdF6c",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:23,name:"Pack of 4 Men Solid Round Neck Polyester Multicolor T-Shirt",price:"₹499",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/y/b/c/l-866-1-866-3-866-4-866-5-ftx-original-imah8akgggummgp8.jpeg?q=70",buyLink:"https://fktr.in/ZTq4m3y",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:24,name:"Men Slim Fit Black Cotton Blend Trousers",price:"₹799",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/trouser/k/z/r/32-pctfsslby00589-peter-england-original-imahdvg2djzazfg2.jpeg?q=70",buyLink:"https://fktr.in/hufu8V7",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:25,name:"Men Tapered Fit Mid Rise Black Jeans",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/jean/h/c/b/-original-imah3fqksvgdd6kc.jpeg?q=70",buyLink:"https://fktr.in/tnyg2sE",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:26,name:"Men Straight Fit Mid Rise Black Jeans",price:"₹599",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/jean/d/e/o/30-mp-sd1021-04-snitch-original-imahf77szscywna7.jpeg?q=70",buyLink:"https://fktr.in/JaYQdTr",productLink:"https://instagram.com",category:"mens-fashion"},
+  {id:27,name:"Men Solid Round Neck Cotton Blend Black T-Shirt",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/e/4/s/xl-235286004-jack-jones-original-imagusu3mawxyb9t.jpeg?q=70",buyLink:"https://fktr.in/nXQ4r8c",productLink:"https://instagram.com",category:"mens-fashion"},
+  
+ 
+  // ----------------- Home & Kitchen -----------------
+  {id:61,name:"Flipkart SmartBuy Plastic Grocery Container - 1200 ml, 650 ml, 350 ml, 250 ml  (Pack of 20, Silver)",price:"₹399",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/container/l/a/t/20-fs-p12-blue-container-flipkart-smartbuy-original-imah6uawqgprxyr4.jpeg?q=70",buyLink:"https://fktr.in/KXfltHq",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:62,name:"nariya Spice Set Plastic  (1 Piece)",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/condiment-set/k/z/v/360-degree-revolving-round-shape-transparent-spice-rack-original-imahfmycfjcgh6ja.jpeg?q=70",buyLink:"https://fktr.in/rX7X5B5",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:63,name:"Homory Plastic Utility Container - 50 ml  (Multicolor)",price:"₹126",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/container/b/s/6/2-pack-of-2-masala-box-pickal-box-4-compartment-air-tight-original-imahfqfb99uxvq6m.jpeg?q=70",buyLink:"https://fktr.in/aLvm8p6",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:64,name:"KIVORA Plastic Fridge Container - 700 ml  (Pack of 6, White)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/container/b/h/p/6-fc-700ml-kivora-original-imahgagfh7y73sjb.jpeg?q=70",buyLink:"https://fktr.in/dY90GSk",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:65,name:"CAPIO ART Designer /Premium/Aesthtic UV Printed Kanha /Krishna Home And Office Decor Wood Key Holder  (7 Hooks, Multicolor)",price:"₹96",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/key-holder/h/6/s/7-cak-krishna-baby-animated-capio-art-original-imahgg74uk8hfpvh.jpeg?q=70",buyLink:"https://fktr.in/1q8Q7K5",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:66,name:"key chai",price:"96",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/key-holder/l/h/k/8-cak-printed-krishna-old-capio-art-original-imahg67sednhwjwn.jpeg?q=70",buyLink:"https://fktr.in/rJFnurL",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:67,name:"ANDOM Multicoloured Round Printed Analogue Wall Clock 30 cm",price:"₹689",img:"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/11/4/a6ccc729-ace2-4e42-9c40-c938a532c4ee1572867029934-1.jpg",buyLink:"https://myntr.it/ZqvmWDV",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:68,name:"CRAFTY COTTAGE Wall Shelves for Home Decor Living Room & HALL Wall Mount MDF Wooden Wall Shelf  (Number of Shelves - 8, Black)",price:"₹150",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/rack-shelf/b/s/r/living-room-bedroom-8-designer-wall-shelves-for-home-decor-items-original-imahbqpgzgakxtcr.jpeg?q=70",buyLink:"https://fktr.in/R4n3e5e",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:69,name:"Ryme Set Of 8 Mini/Small Artificial Plants Bonsai Wild Artificial Plant with Pot  (15 cm, Multicolor)",price:"₹149",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/artificial-plant/x/g/h/15-yes-8pots002-ryme-original-imahcdarfexvhveh.jpeg?q=70",buyLink:"https://fktr.in/yLEt31K",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:70,name:"Flipkart SmartBuy Elegant White Crane Couple Statue with Golden Wings –14 inch – Resin Home Décor Decorative Showpiece - 21.5 cm  (Polyresin, White, Gold)",price:"₹498",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/1/v/p/10-15-2-mphiranso2white-fsb-flipkart-smartbuy-21-5-original-imahg3gbvwrr5g3d.jpeg?q=70",buyLink:"https://fktr.in/2AtsaPo",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:71,name:"Peijinsart Vinyl Decorative Multicolor Wallpaper  (L x W: 200 cm x 60 cm)",price:"₹125",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wallpaper/f/x/m/60-200-8-wallpaper-sticker-floppy-original-imah9gwz9yzdjnpg.jpeg?q=70",buyLink:"https://fktr.in/CbMqeMk",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:72,name:"Craftzo Wall Shelf / Planter Stand/Decorative Wall Hanging/ Wooden Wall Shelf  (Number of Shelves - 1, Brown)",price:"₹121",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/rack-shelf/x/v/g/living-room-bedroom-4-cz-ws-0909-005-love-craftzo-1-original-imaheh6f8neg9zqd.jpeg?q=70",buyLink:"https://fktr.in/G51yKD1",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:73,name:"Plantex Premium Flower Transparent Glass Corner Shelf for Bathroom/Kitchen Shelf/Bathroom Accessories(9x9 Inches) Glass Wall Shelf  (Number of Shelves - 3, Clear)",price:"₹999",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/rack-shelf/b/2/b/storage-3-premium-flower-glass-corner-shelf-for-bathroom-kitchen-original-imahffmukkzpdfby.jpeg?q=70",buyLink:"https://fktr.in/WQhBg8f",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:74,name:"Raptech Key Holder for Home|Wooden Key Stand for Wall|Key Hanger|Key hooks (11483) Wood Key Holder  (7 Hooks, Multicolor)",price:"₹102",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/key-holder/4/e/v/7-11483-raptech-original-imah9qrygfxx7yb6.jpeg?q=70",buyLink:"https://fktr.in/4Va9RkE",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:75,name:"Trend Store Co Zig Zag Corner Wall Mount Shelf | Floating Rack Shelves | Books Shelf - MDF (Medium Density Fiber), Wooden Wall Shelf  (Number of Shelves - 5, Black)",price:"₹480",img:"https://rukminim2.flixcart.com/image/612/612/kfoapow0/rack-shelf/p/6/q/zigzag-corner-wall-mount-shelf-unit-racks-and-shelves-wall-shelf-original-imafw2yecxtfybc5.jpeg?q=70",buyLink:"https://fktr.in/7vi9MVv",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:76,name:"prayati Plastic Fridge Container - 1500 ml  (Pack of 5, White)",price:"₹231",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/container/8/r/c/5-fridge-storage-basket-food-storage-container-with-removable-original-imagn6dgwhzhkzkq.jpeg?q=70",buyLink:"https://fktr.in/N5Z6gyk",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:77,name:"Sentricus Plastic Grocery Container - 600 ml  (Blue)",price:"₹149",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/liquid-dispenser/e/f/f/8-blue-2-in-1-soap-dispenser-no-snowberry-12-600-original-imah7rbpmpzzgfcx.jpeg?q=70",buyLink:"https://fktr.in/TieKdea",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:78,name:"special",price:"₹1",img:"https://via.placeholder.com/220x180.png?text=Home+18",buyLink:"https://fktr.in/FS141vN",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:79,name:"Quickmart Spice Set Plastic  (1 Piece)",price:"₹125",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/condiment-set/n/t/p/premium-masala-box-and-spice-containers-set-quickmart-original-imahc8tgvfphm3gg.jpeg?q=70",buyLink:"https://fktr.in/FS141vN",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:80,name:"OGGN Set of 7 Wooden Spatula Kitchen Tool Set  (Brown, Cooking Spoon)",price:"₹186",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/spatula/y/i/2/7-ogg-nay-ss7-oggn-original-imahe6z7z3bpqjfm.jpeg?q=70",buyLink:"https://fktr.in/6GoLKda",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:81,name:"Eagean Stainless Steel Cooking and Serving Spoon Spatula, Set of 7 Kitchen Tool Set  (Silver, Cooking Spoon)",price:"₹249",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/kitchen-tool-set/a/a/e/pthk-4747-eagean-original-imaghx5tpjbbnyr7.jpeg?q=70",buyLink:"https://fktr.in/9ns018u",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:82,name:"Bekner Stainless Steel Insulated grip Serving Spoon set For Home use Kitchen Tool Set  (Cooking Spoon, Spatula, Ladle)",price:"₹499",img:"https://rukminim2.flixcart.com/image/612/612/kgl5ua80/kitchen-tool-set/g/7/7/r-56-bekner-original-imafws642bt4dzxt.jpeg?q=70",buyLink:"https://fktr.in/FTiz38a",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:83,name:"gopi by GopiStore By Gopi Group Premium 450 ml Vegetable & Fruit Chopper  (1 chopper)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/kzk6bgw0/chopper/p/x/l/gg-500-gopi-original-imagbjngjsyhdzzy.jpeg?q=70",buyLink:"https://fktr.in/aKSx03q",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:84,name:"THEODORE 3 Pc Stainless Steel Knife Set High Carbon SS Ultra Sharp Butcher, Meat, Pairing, Vegetable for Kitchen",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/kitchen-knife/m/0/r/3-k-3-7-28-theodore-original-imah95h4dxj7637g.jpeg?q=70",buyLink:"https://fktr.in/Fb3M00J",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:85,name:"nariya NEW INNOVATIVE CASSEROLE SET COMES WITH LARGE CAPACITY FOR EVERYDAY USE AT HOME Thermoware Casserole Set  (1750 ml)",price:"₹249",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/casserole/u/x/o/1-1750-turquoise-casserole-nariya-original-imahfatgrq3eegyc.jpeg?q=70",buyLink:"https://fktr.in/djoSuBk",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:86,name:"Sigri-wala Primecook Manual Cute Design Toughened Glass Gas Stove Stainless Steel Manual Gas Stove  (2 Burners)",price:"₹949",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/gas-stove/r/s/s/2-lpg-5-cute-2b-na-blkd-sigri-wala-54-manual-original-imah7jt2fje9rhmw.jpeg?q=70",buyLink:"https://fktr.in/ppB3lZP",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:87,name:"Alexa Plastic Fridge Container - 1200 ml  (Pack of 6, White)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/container/p/1/3/6-fcw6-alexa-original-imah5nrzxdhjkj7d.jpeg?q=70",buyLink:"https://fktr.in/MsjZtye",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:88,name:"ArrayStyle Food-grade Silicone Baking Mat  (Pack of 1)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/baking-roller/t/w/w/1-cooking-mat-kpdreamland-original-imah97yhdyfzqeky.jpeg?q=70",buyLink:"https://fktr.in/etji87i",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:89,name:"Funel Plastic Plastic Fruit Juicer Juice Making Machine with Steel Handle, Green Hand Juicer Hand Juicer  (Green)",price:"₹249",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/hand-juicer/v/e/8/manual-hand-juicer-mixer-blender-juice-maker-machine-for-home-original-imahezawzjvbszeu.jpeg?q=70",buyLink:"https://fktr.in/7lyAopl",productLink:"https://instagram.com",category:"home-kitchen"},
+  {id:90,name:"The Indus Valley Super Smooth Cast Iron Tawa for Dosa/Chapathi - 10.8 inch Tawa 27.6 cm diameter  (Cast Iron, Induction Bottom)",price:"₹899",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/pot-pan/t/u/l/kc-fe-ta-009-the-indus-valley-original-imah8mu7dvwd33fz.jpeg?q=70",buyLink:"https://fktr.in/JopEWoX",productLink:"https://instagram.com",category:"home-kitchen"},
 
-function renderFeatured(){
-featuredContainer.innerHTML="";
-featured.forEach(g=>{
-const card = document.createElement("div");
-card.className="featured-card";
-card.innerHTML=`<img src="${g.thumbnail}" alt="${g.title}"><h3>${g.title}</h3>`;
-featuredContainer.appendChild(card);
-});
-updateCarousel();
+  {id:91,name:"Linion 40 LEDs 15 m Yellow Steady Ball Rice Lights  ",price:"₹60",img:"https://rukminim2.flixcart.com/image/312/312/xif0q/shopsy-rice-light/m/f/j/ball-led-rice-lights-15-meter-for-diwali-christmas-tree-festival-original-imagtntczya8epmq.jpeg?q=70&crop=false",buyLink:"https://fktr.in/y0YHVYf",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:92,name:" HANDICRAFTS Birds wall hanging Decoration Home Decor ",price:"₹161",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/h/c/n/3-13-set-66-0-mlh-35-original-imah8mrpgffptzty.jpeg?q=70",buyLink:"https://fktr.in/LAc7lix",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:93,name:"BECKON VENTURE Vastu Fangshui Religious Idol of Lord Buddha head statue Big Size Idols|Meditating Buddha Idols",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/n/4/v/12-15-24-msphalffacesilverblack-002-beckon-venture-28-original-imahbfgykzu2tzkt.jpeg?q=70",buyLink:"https://fktr.in/ivWly39",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:94,name:"Aesthetic Room Decoration Kit Vines & Fairy LED Light Perfect for Wall Decor Pack of 7",price:"₹239",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wall-decoration/i/s/g/aesthetic-room-decoration-kit-vines-fairy-led-light-perfect-for-original-imahftdfasdfsxbe.jpeg?q=70",buyLink:"https://fktr.in/NjjgI6Y",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:95,name:"Sage OM Wall Decorative/Decor Showpiece for Home/Office, Round Shape, Size 12 inches  (12 inch X 12 inch, Brown)",price:"₹125",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wall-decoration/q/o/p/om-wall-decorative-decor-showpiece-for-home-office-round-shape-original-imagzk8xvrkyqsf6.jpeg?q=70",buyLink:"https://fktr.in/tjJzMrl",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:96,name:"PRIDE STORE Diwali decoration items Tealight Candle Holder Wooden Tealight Holder Set  (Multicolor, Pack of 10)",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle-tealight-holder/n/q/b/4-10-pride-7014-pride-store-3-5-original-imahfq5pvafpgeku.jpeg?q=70",buyLink:"https://fktr.in/wTzQKQz",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:97,name:"Artificial Plants With Bird & light For Home, Room, Bedroom, Office & wedding. Bonsai Wild Artificial Plant with Pot ",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/artificial-plant/l/h/a/23-5-yes-001-arti-plant-poka-original-imahfhpxcyqybuzg.jpeg?q=70",buyLink:"https://fktr.in/hxoevl7",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:98,name:"eCraftIndia Lotus Cow Shubh Labh Hanging for Home, Diwali Decoration Items- Pack of 5 Pack of 5  (36 cm X 1 cm, Multicolor)",price:"₹1400",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wall-decoration/l/7/o/lotus-cow-shubh-labh-hanging-for-home-diwali-decoration-items-original-imah44jdbfzzhhuu.jpeg?q=70",buyLink:"https://fktr.in/qRaX6kR",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:99,name:"Banna Art 6 Candle | Diwali/ Birthday Decoration Candle| Designer Candle Combo Pack Candle  (Multicolor, Pack of 6)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle/t/v/0/na-home-decor-6-pcs-candle-diya-candle-festival-diwali-navratri-original-imah2fcztvfdddtx.jpeg?q=70",buyLink:"https://fktr.in/y329Uta",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:100,name:"CW Crafts World Wooden Home And Office Decorative Gayatri Mantra Wall Hanging For Decor,  (63 cm X 27 cm, Multicolor)",price:"₹142",img:"https://rukminim2.flixcart.com/image/612/612/l4rd0280/wall-decoration/g/l/9/wooden-home-and-office-decorative-gayatri-mantra-wall-hanging-original-imagfhytgkkrgufv.jpeg?q=70",buyLink:"https://fktr.in/Jpva4f4",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:101,name:"RKG Craft Home Decor diwali Wall Decor fastive dieali decoration hanging Pack of 2  (Pink)",price:"₹190",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wall-decoration/q/e/5/home-decor-diwali-wall-decor-fastive-dieali-decoration-hanging-2-original-imahfcxeuhcs8vgz.jpeg?q=70",buyLink:"https://fktr.in/PNqrvyv",productLink:"",category:"diwali-items"},
+  {id:102,name:"ANSHKIT Wooden Tealight Holder Set  (Multicolor, Pack of 5)",price:"₹184",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle-tealight-holder/r/5/a/5-5-raditional-diya-stand-floating-shelf-for-pooja-room-living-original-imahfz45tzcajxuh.jpeg?q=70",buyLink:"https://fktr.in/t1tSfKy",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:103,name:"Pride Kraft Shubh Labh Sticker for Home Decor Diwali Decoration Door Sticker  (Multicolor)",price:"₹71",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wall-decoration/h/q/k/shubh-labh-sticker-for-home-decor-diwali-decoration-door-sticker-original-imah5kg7npypazne.jpeg?q=70",buyLink:"https://fktr.in/tr18VXz",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:104,name:"Radiant Crafts Tealight Candle Holder Set For Navratri, Diwali, Birthday Decoration Candle  (Multicolor, Pack of 6)",price:"₹198",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle/e/2/t/fragile-home-decor-elephant-tea-light-candles-for-diwali-original-imahfxckdvykdnsv.jpeg?q=70",buyLink:"https://fktr.in/LEpOxsp",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:105,name:"TGS Krishnaya Wall Hanging Om Krishna Vasudevaya Premanand Maharaj Ji Mantra (12156)  (11 inch X 7 inch, Multicolor)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/wall-decoration/4/z/2/krishnaya-wall-hanging-om-krishna-vasudevaya-premanand-maharaj-original-imahfkrgh8hzh33c.jpeg?q=70",buyLink:"https://fktr.in/n1wtsgU",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:106,name:"Unique bazar 30 Tealight candle Candle  (White, Pack of 30)",price:"₹49",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle/x/d/j/unscented-home-decor-30-tealight-candle-30-30-tealight-candle-original-imahgegna2ghc3qz.jpeg?q=70",buyLink:"https://placeholder.com",productLink:"https://fktr.in/iIaGN5Q",category:"diwali-items"},
+  {id:107,name:"SMRK Hanuman Idol For Car Dashboard, Temple, Diwali Gift, Home Decor, Festivals Decorative Showpiece - 9 cm  (Resin, Orange)",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/u/g/i/3-6-hanuman-ji-statue-sitting-pawan-putra-alija-idol-bajrangbali-original-imahgb37mrkvbjsr.jpeg?q=70",buyLink:"https://fktr.in/36Fp7xX",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:108,name:"Royalbox Home Décor Buddha Statue For Home Decoration Buddha Head Decorative Showpiece - 19 cm  (Polyresin, Black, Gold)",price:"₹199",img:"https://rukminim2.flixcart.com/image/612/612/ks3jjbk0/showpiece-figurine/y/k/z/had19-royalbox-original-imag5ryvheq44hst.jpeg?q=70",buyLink:"https://fktr.in/afAR2zs",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:109,name:"Inufu Metal Urli Decorative Showpiece - 29 cm  (Iron, Gold)",price:"₹191",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/x/6/4/6-5-29-mdu0001-inufu-29-original-imahg5m8yxaax87e.jpeg?q=70",buyLink:"https://fktr.in/CcrchHO",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:110,name:"RADHE RADHE lucky coin WALL HANGING WINDCHIME DIWALI MONEY ATTRACTION HOME OFFICE BALCONY Decorative Showpiece - 20 cm  (Metal, Copper)",price:"₹349",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/r/7/w/20-5-wall-hanging-windchime-coin-windchime-yellow-brass-good-original-imahfbz6chtxgdx8.jpeg?q=70",buyLink:"https://fktr.in/MotjgKD",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:111,name:"EARNAM Lotus Design Tealight candle Holder for Diwali Decoration, diya Flower Rangoli Gold Plated 5 - Cup Tealight Holder Set  (Pink, Gold, Pack of 5)",price:"₹149",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle-tealight-holder/k/0/i/4-5-lotas-diya-5-earnam-4-original-imahfgagafuaddp8.jpeg?q=70",buyLink:"https://fktr.in/Pxthjrg",productLink:"",category:"diwali-items"},
+  {id:112,name:"CraftVatika Set of 6 Jharokha Diyas with LED Candles – Wall Hanging Festive Home Décor Paper (Pack of 6) Hanging Diya  (Height: 2.75 inch)",price:"₹499",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/diya/9/c/q/6-dfmw452-6-pc-craftvatika-2-75-original-imahezgdhvq2qgtq.jpeg?q=70",buyLink:"https://fktr.in/OpasB9k",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:113,name:"Kavya Craft Jharna Backflow Smoke Fountain with 10 pc Scented Incense Cone Decorative Showpiece - 12 cm  (Resin, Black)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/m/8/o/7-7-jhrn01-kavya-craft-12-original-imagtjhhbgzpcvrk.jpeg?q=70",buyLink:"https://fktr.in/rW9atpb",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:114,name:"KLASSYWORLD Shiv Ling Incense Burner with 30 Back Flow Incense Cones , Home Decor-1-Pcs/30 Decorative Showpiece - 10 cm  (Ceramic, Black)",price:"₹299",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-showpiece-figurine/8/s/c/10-22-back-flow-incense-holder-shiv-ling-incense-burner-with-original-imahf74pzqs2dx53.jpeg?q=70",buyLink:"https://fktr.in/kxL3OZa",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:115,name:"xenith Flickering Flameless Smokeless Dancing Votive Acrylic LED Candle Pack of 1 Candle  (Gold, Yellow, Pack of 1)",price:"₹99",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/candle/z/e/n/unscented-home-decor-flickering-flameless-smokeless-dancing-original-imah4zmffmhhzwzt.jpeg?q=70",buyLink:"https://fktr.in/IPv7WwX",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:116,name:"MSVTRADESS Water-Proof Rope and Strip Light for Home Decoration, Decorative Wall Light  (5 m X 1 cm, Multicolor)",price:"₹399",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/xmas-tree-decoration/w/x/j/1-led-rope-lights-msvtradess-original-imahf7k5h3hv4kgb.jpeg?q=70",buyLink:"https://fktr.in/1c9XBs3",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:117,name:"HOMELEE DEKOR Pink Lotus Artificial Flower  (25.4 cm, Pack of 6, Garlands)",price:"₹349",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/artificial-flower/w/y/q/6-lotush-homelee-dekor-original-imahg928fhufaysu.jpeg?q=70",buyLink:"https://fktr.in/5aihj9h",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:118,name:"STORE22 Home decor Pink Westeria Artificial Flower  (43.3 cm, Pack of 12, Vine & Creepers)",price:"₹249",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/artificial-flower/b/k/l/12-home-party-wedding-decor-b-pink-green-westeria-artificial-original-imah4czycnwz3k3r.jpeg?q=70",buyLink:"https://fktr.in/AHBpFYR",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:119,name:"kaevion Metal Brass Degchi Style Incense Burner | Dhoop Holder for Pooja | Home Decor Decorative Showpiece - 15 cm  (Brass, Gold)",price:"₹599",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/showpiece-figurine/a/x/e/15-13-wall-hanging-metal-brass-medium-5-inch-degchi-style-original-imah693qdj4wcyz6.jpeg?q=70",buyLink:"https://fktr.in/PMAESg9",productLink:"https://instagram.com",category:"diwali-items"},
+  {id:120,name:"PREMA SHINE Artificial Flower Pot Lily Bunch | Guldasta for Home, Room & Diwali Decoration Yellow Lily Artificial Flower with Pot  (21 cm, Pack of 1, Flower with Basket)",price:"₹49",img:"https://rukminim2.flixcart.com/image/612/612/xif0q/artificial-flower/i/9/1/1-ps-05-prema-shine-original-imahgfhyxysuxfrb.jpeg?q=70",buyLink:"https://fktr.in/8pKBrdc",productLink:"https://instagram.com",category:"diwali-items"},
+
+
+
+];
+
+const homepageLimit = 6; // Show only 6 products on homepage
+
+const productList = document.getElementById('product-list');
+
+function render(list, limit = null) {
+  productList.innerHTML = '';
+  const displayList = limit ? list.slice(0, limit) : list;
+  displayList.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
+      <div style="padding:12px;">
+        <div style="font-size:12px;color:#9fb0c6;">${p.category.replace('-', ' ')}</div>
+        <h3 style="font-weight:800;margin-top:6px;">${p.name}</h3>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+          <div style="font-weight:900;color:var(--gold);">${p.price}</div>
+        </div>
+        <div style="display:flex;align-items:center;margin-top:8px;">
+          <a class="buy-btn" href="${p.buyLink}" target="_blank">Buy Now</a>
+          <a class="buy-btn" href="${p.instagramLink}" target="_blank">Instagram</a>
+        </div>
+      </div>`;
+    productList.appendChild(card);
+  });
 }
-function updateCarousel(){
-const cardWidth = featuredContainer.children[0]?featuredContainer.children[0].offsetWidth+15:0;
-featuredContainer.style.transform=`translateX(-${featuredIndex*cardWidth}px)`;
-}
-document.getElementById("arrow-left").onclick=()=>{featuredIndex=Math.max(0,featuredIndex-1);updateCarousel();}
-document.getElementById("arrow-right").onclick=()=>{featuredIndex=Math.min(featuredContainer.children.length-3,featuredIndex+1);updateCarousel();}
-setInterval(()=>{featuredIndex=(featuredIndex+1)%(Math.max(featuredContainer.children.length-2,1));updateCarousel();},3000);
 
-// Categories Tabs
-const categoriesContainer = document.getElementById("categories");
-categories.forEach(cat=>{
-const btn = document.createElement("button");
-btn.className="category-btn";
-btn.textContent=cat;
-btn.onclick=()=>{document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');filterGames(cat);};
-if(cat==='All') btn.classList.add('active');
-categoriesContainer.appendChild(btn);
+// Initially show only 6 products on homepage
+render(products, homepageLimit);
+
+// Search + Category
+document.getElementById('searchInput').addEventListener('input',()=>{
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  render(products.filter(p=>(p.name+p.category).toLowerCase().includes(q)));
 });
 
-// Games Grid
-const gamesContainer = document.getElementById("games");
-function renderGames(list){
-gamesContainer.innerHTML="";
-list.forEach(g=>{
-const card = document.createElement("div");
-card.className="game-card";
-card.innerHTML=`<img src="${g.thumbnail}" alt="${g.title}"><h3>${g.title}</h3><button onclick="playGame('${g.file}')">Play Now</button>`;
-gamesContainer.appendChild(card);
-});
-}
-renderGames(games);
-
-// Search Filter
-document.getElementById("search").addEventListener("input",e=>{
-const keyword=e.target.value.toLowerCase();
-filterGames(document.querySelector('.category-btn.active').textContent, keyword);
+document.querySelectorAll('.cat-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    if(cat === 'all') {
+      render(products, homepageLimit);
+    } else {
+      render(products.filter(p => p.category === cat));
+    }
+  });
 });
 
-function filterGames(category='All',keyword=''){
-const filtered = games.filter(g=>{
-return (category==='All' || g.category===category) && g.title.toLowerCase().includes(keyword.toLowerCase());
-});
-renderGames(filtered);
-}
-
-// Game Modal
-const modal=document.getElementById("gameModal");
-const frame=document.getElementById("gameFrame");
-const closeModal=document.getElementById("modalClose");
-function playGame(file){
-frame.src=file;
-modal.style.display="flex";
-}
-closeModal.onclick=()=>{modal.style.display="none";frame.src="";}
-window.onclick=e=>{if(e.target===modal){modal.style.display="none";frame.src="";}}
+// Banner carousel
+const track=document.getElementById('bannerTrack');
+let index=0;
+function slideBanner(){ index=(index+1)%track.children.length; track.style.transform=`translateX(-${index*100}%)`; }
+let autoSlide=setInterval(slideBanner,4000);
+const bannerSlider=document.getElementById('bannerSlider');
+bannerSlider.addEventListener('touchstart',touchStart);
+bannerSlider.addEventListener('touchmove',touchMove);
+bannerSlider.addEventListener('touchend',touchEnd);
+let startX=0,currentTranslate=0,prevTranslate=0,isDragging=false;
+function touchStart(e){ clearInterval(autoSlide); startX=e.touches[0].clientX; prevTranslate=currentTranslate; isDragging=true;}
+function touchMove(e){ if(!isDragging) return; const x=e.touches[0].clientX; const dx=x-startX; track.style.transform=`translateX(${prevTranslate+dx}px)`;}
+function touchEnd(e){ isDragging=false; const movedBy=e.changedTouches[0].clientX-startX; if(movedBy<-50) index=Math.min(index+1,track.children.length-1); if(movedBy>50) index=Math.max(index-1,0); track.style.transform=`translateX(-${index*100}%)`; autoSlide=setInterval(slideBanner,4000);}
 </script>
-<script async="async" data-cfasync="false" src="//pl27788340.revenuecpmgate.com/65971f1b5d75c6e6bd1961d730878803/invoke.js"></script>
-<div id="container-65971f1b5d75c6e6bd1961d730878803"></div>
+
 </body>
 </html>
 
