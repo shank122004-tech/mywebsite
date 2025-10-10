@@ -170,19 +170,39 @@ const articleTitles = [
 "Work from Home Jobs That Pay Well",
 "How to Build an Online Business"
 ];
+
 let articleMetaData = [];
-for(let i=1;i<=500;i++){
-  const title = articleTitles[Math.floor(Math.random()*articleTitles.length)] + " #" + i;
+
+for (let i = 1; i <= 500; i++) {
+  const title = articleTitles[Math.floor(Math.random() * articleTitles.length)] + " #" + i;
   const articleCard = document.createElement('div');
-  articleCard.className='article-card';
+  articleCard.className = 'article-card';
+
   // Pick 3 random internal links
-  let linksHTML="";
-  for(let j=0;j<3;j++){
-    const rand=i+Math.floor(Math.random()*490);
+  let linksHTML = "";
+  for (let j = 0; j < 3; j++) {
+    const rand = i + Math.floor(Math.random() * 490);
     linksHTML += `<li><a href="#article${rand}">Read: Article #${rand}</a></li>`;
   }
+
+  // ✅ Ad banner HTML (You can replace this with your ad code)
+  const adBanner = `
+    <div class="ad-banner">
+      <script type="text/javascript">
+	atOptions = {
+		'key' : 'c36ecc19f9522f8cd17617678935a9d1',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/c36ecc19f9522f8cd17617678935a9d1/invoke.js"></script>
+    </div>
+  `;
+
   articleCard.id = `article${i}`;
-  articleCard.innerHTML=`
+  articleCard.innerHTML = `
     <h3>${title}</h3>
     <p>This is a short description for the article "${title}".</p>
     <div class="details">
@@ -190,41 +210,43 @@ for(let i=1;i<=500;i++){
       <ul>${linksHTML}</ul>
     </div>
     <button class="read-more-btn">Read More</button>
+    ${adBanner}  <!-- 👈 Ad banner added below every article -->
   `;
+
   articlesContainer.appendChild(articleCard);
 
   // Collect dynamic SEO meta data
   articleMetaData.push({
     title: title,
     description: `Detailed guide on "${title}" to increase your online income with trending tools.`,
-    keywords: `earn money, online income, ${title.replace(/ /g,",")}`
+    keywords: `earn money, online income, ${title.replace(/ /g, ",")}`
   });
 }
 
 // Read More toggle
-document.querySelectorAll('.read-more-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
+document.querySelectorAll('.read-more-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
     const details = btn.previousElementSibling;
     details.style.display = details.style.display === 'block' ? 'none' : 'block';
-    btn.textContent = details.style.display==='block' ? 'Show Less' : 'Read More';
+    btn.textContent = details.style.display === 'block' ? 'Show Less' : 'Read More';
   });
 });
 
 // Calculators
-function calculateEarnings(){
+function calculateEarnings() {
   const daily = parseFloat(document.getElementById('earningsInput').value);
-  if(isNaN(daily)){ alert('Enter valid number'); return; }
-  document.getElementById('monthlyOutput').textContent = `Estimated Monthly: $${(daily*30).toFixed(2)}`;
+  if (isNaN(daily)) { alert('Enter valid number'); return; }
+  document.getElementById('monthlyOutput').textContent = `Estimated Monthly: $${(daily * 30).toFixed(2)}`;
 }
-function calculateROI(){
+function calculateROI() {
   const inv = parseFloat(document.getElementById('investmentInput').value);
   const roi = parseFloat(document.getElementById('roiInput').value);
-  if(isNaN(inv) || isNaN(roi)){ alert('Enter valid numbers'); return; }
-  document.getElementById('roiOutput').textContent = `ROI: $${(inv*roi/100).toFixed(2)}`;
+  if (isNaN(inv) || isNaN(roi)) { alert('Enter valid numbers'); return; }
+  document.getElementById('roiOutput').textContent = `ROI: $${(inv * roi / 100).toFixed(2)}`;
 }
 
 // Dynamic meta injection for SEO
-articleMetaData.forEach((article,i)=>{
+articleMetaData.forEach((article, i) => {
   const metaTitle = document.createElement('title');
   metaTitle.textContent = article.title;
   document.head.appendChild(metaTitle);
@@ -240,6 +262,7 @@ articleMetaData.forEach((article,i)=>{
   document.head.appendChild(metaKeywords);
 });
 </script>
+
 <script>
 (function(ygq){
 var d = document,
@@ -266,5 +289,6 @@ l.parentNode.insertBefore(s, l);
 </script>
 </body>
 </html>
+
 
 
