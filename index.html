@@ -52,14 +52,195 @@ header { justify-content:center; padding:15px 20px; }
 </head>
 <body>
 
-<header>
-<nav>
-<a href="#articles">Articles</a>
-<a href="#tools">Tools</a>
-<a href="#contact">Contact</a>
-<a href="#convert" class="btn-primary">Start Now</a>
-</nav>
+<!-- Ultra-Premium Header -->
+<header class="premium-header">
+  <div class="container">
+    <a href="#" class="logo">MyBrand</a>
+
+    <!-- Hamburger menu for mobile -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#articles">Articles</a>
+      <a href="#tools">Tools</a>
+      <a href="#contact">Contact</a>
+      <a href="#convert" class="btn-primary">Start Now</a>
+    </nav>
+  </div>
 </header>
+
+<style>
+/* ---------- Reset & Base ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+a { text-decoration: none; }
+
+/* ---------- Header Styling ---------- */
+.premium-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(12px); /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.05); /* Slight transparent glass */
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  z-index: 9999;
+  transition: all 0.3s ease;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15); /* floating effect */
+}
+
+.premium-header.scrolled {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+}
+
+.premium-header .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.premium-header .logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+.premium-header .logo:hover {
+  transform: scale(1.1);
+  color: #ffdd59;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Hover underline animation */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 50%;
+  bottom: 4px;
+  background-color: #ffdd59;
+  transition: 0.3s ease;
+  transform: translateX(-50%);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* CTA button */
+.nav-links .btn-primary {
+  background: #ff6b6b;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.nav-links .btn-primary:hover {
+  background: #ff4757;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(255,71,87,0.5);
+}
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 25px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ---------- Mobile Responsive ---------- */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    background: rgba(0,0,0,0.85);
+    flex-direction: column;
+    padding-top: 100px;
+    gap: 25px;
+    transition: right 0.4s ease;
+    box-shadow: -4px 0 25px rgba(0,0,0,0.4);
+  }
+  .nav-links.active { right: 0; }
+  .hamburger { display: flex; }
+}
+
+/* Hamburger animation when active */
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+</style>
+
+<script>
+// Mobile menu toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  hamburger.classList.toggle('active');
+});
+
+// Close menu on link click (mobile)
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if(navLinks.classList.contains('active')){
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+  });
+});
+
+// Floating shadow effect on scroll
+const header = document.querySelector('.premium-header');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50){
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+</script>
+
 <script type="text/javascript">
 	atOptions = {
 		'key' : 'c36ecc19f9522f8cd17617678935a9d1',
@@ -354,6 +535,7 @@ l.parentNode.insertBefore(s, l);
 </script>
 </body>
 </html>
+
 
 
 
