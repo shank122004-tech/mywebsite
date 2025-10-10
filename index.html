@@ -159,16 +159,16 @@ l.parentNode.insertBefore(s, l);
 // Article generation
 const articlesContainer = document.querySelector('.articles');
 const articleTitles = [
-"Top 10 Ways to Earn Money Online",
-"Best Freelancing Platforms for Beginners",
-"How to Make Passive Income in 2025",
-"AI Tools That Can Boost Your Earnings",
-"Affiliate Marketing Tips to Grow Income",
-"Digital Product Ideas That Sell Fast",
-"Side Hustles You Can Start Today",
-"Investing Smartly: A Beginner's Guide",
-"Work from Home Jobs That Pay Well",
-"How to Build an Online Business"
+  "Top 10 Ways to Earn Money Online",
+  "Best Freelancing Platforms for Beginners",
+  "How to Make Passive Income in 2025",
+  "AI Tools That Can Boost Your Earnings",
+  "Affiliate Marketing Tips to Grow Income",
+  "Digital Product Ideas That Sell Fast",
+  "Side Hustles You Can Start Today",
+  "Investing Smartly: A Beginner's Guide",
+  "Work from Home Jobs That Pay Well",
+  "How to Build an Online Business"
 ];
 
 let articleMetaData = [];
@@ -185,22 +185,6 @@ for (let i = 1; i <= 500; i++) {
     linksHTML += `<li><a href="#article${rand}">Read: Article #${rand}</a></li>`;
   }
 
-  // ✅ Ad banner HTML (You can replace this with your ad code)
-  const adBanner = `
-    <div class="ad-banner">
-      <script type="text/javascript">
-	atOptions = {
-		'key' : 'c36ecc19f9522f8cd17617678935a9d1',
-		'format' : 'iframe',
-		'height' : 250,
-		'width' : 300,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/c36ecc19f9522f8cd17617678935a9d1/invoke.js"></script>
-    </div>
-  `;
-
   articleCard.id = `article${i}`;
   articleCard.innerHTML = `
     <h3>${title}</h3>
@@ -210,10 +194,28 @@ for (let i = 1; i <= 500; i++) {
       <ul>${linksHTML}</ul>
     </div>
     <button class="read-more-btn">Read More</button>
-    ${adBanner}  <!-- 👈 Ad banner added below every article -->
   `;
 
   articlesContainer.appendChild(articleCard);
+
+  // ✅ Insert Ad after every 3 articles
+  if (i % 3 === 0) {
+    const adBanner = document.createElement('div');
+    adBanner.className = 'ad-container';
+    adBanner.innerHTML = `
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'c36ecc19f9522f8cd17617678935a9d1',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/c36ecc19f9522f8cd17617678935a9d1/invoke.js"></script>
+    `;
+    articlesContainer.appendChild(adBanner);
+  }
 
   // Collect dynamic SEO meta data
   articleMetaData.push({
@@ -263,6 +265,30 @@ articleMetaData.forEach((article, i) => {
 });
 </script>
 
+<style>
+/* Article styling */
+.article-card {
+  margin-bottom: 30px;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Ad container styling */
+.ad-container {
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Responsive for mobile */
+@media screen and (max-width: 768px) {
+  .ad-container iframe {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+</style>
+
+
 <script>
 (function(ygq){
 var d = document,
@@ -289,6 +315,7 @@ l.parentNode.insertBefore(s, l);
 </script>
 </body>
 </html>
+
 
 
 
