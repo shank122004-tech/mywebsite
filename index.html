@@ -154,7 +154,6 @@ l.parentNode.insertBefore(s, l);
 <p>&copy; 2025 becomebillionaire.shop. All rights reserved.</p>
 <p><a href="#" style="color:#1E90FF;">Privacy Policy</a> | <a href="#" style="color:#1E90FF;">Terms of Service</a></p>
 </footer>
-
 <script>
 // Article generation
 const articlesContainer = document.querySelector('.articles');
@@ -173,6 +172,43 @@ const articleTitles = [
 
 let articleMetaData = [];
 
+// Function to create a placeholder for lazy-load ad
+function createAdPlaceholder(container) {
+  const adDiv = document.createElement('div');
+  adDiv.className = 'ad-container lazy-ad';
+  adDiv.dataset.loaded = "false"; // Track if ad is loaded
+  container.appendChild(adDiv);
+  return adDiv;
+}
+
+// Function to load Adsterra ad dynamically
+function loadAd(adDiv) {
+  if (adDiv.dataset.loaded === "true") return; // Prevent multiple loads
+
+  // atOptions script
+  const atOptions = document.createElement('script');
+  atOptions.type = 'text/javascript';
+  atOptions.text = `
+    atOptions = {
+      'key' : 'c36ecc19f9522f8cd17617678935a9d1',
+      'format' : 'iframe',
+      'height' : 250,
+      'width' : 300,
+      'params' : {}
+    };
+  `;
+  adDiv.appendChild(atOptions);
+
+  // invoke.js script
+  const invokeScript = document.createElement('script');
+  invokeScript.type = 'text/javascript';
+  invokeScript.src = '//www.highperformanceformat.com/c36ecc19f9522f8cd17617678935a9d1/invoke.js';
+  adDiv.appendChild(invokeScript);
+
+  adDiv.dataset.loaded = "true";
+}
+
+// Generate articles
 for (let i = 1; i <= 500; i++) {
   const title = articleTitles[Math.floor(Math.random() * articleTitles.length)] + " #" + i;
   const articleCard = document.createElement('div');
@@ -198,23 +234,9 @@ for (let i = 1; i <= 500; i++) {
 
   articlesContainer.appendChild(articleCard);
 
-  // ✅ Insert Ad after every 3 articles
+  // Insert lazy-load ad after every 3 articles
   if (i % 3 === 0) {
-    const adBanner = document.createElement('div');
-    adBanner.className = 'ad-container';
-    adBanner.innerHTML = `
-      <script type="text/javascript">
-        atOptions = {
-          'key' : 'c36ecc19f9522f8cd17617678935a9d1',
-          'format' : 'iframe',
-          'height' : 250,
-          'width' : 300,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/c36ecc19f9522f8cd17617678935a9d1/invoke.js"></script>
-    `;
-    articlesContainer.appendChild(adBanner);
+    createAdPlaceholder(articlesContainer);
   }
 
   // Collect dynamic SEO meta data
@@ -233,6 +255,22 @@ document.querySelectorAll('.read-more-btn').forEach(btn => {
     btn.textContent = details.style.display === 'block' ? 'Show Less' : 'Read More';
   });
 });
+
+// Lazy-load ads when scrolling near them
+function lazyLoadAds() {
+  const ads = document.querySelectorAll('.lazy-ad');
+  const windowBottom = window.innerHeight + window.scrollY;
+
+  ads.forEach(ad => {
+    if (ad.dataset.loaded === "false" && ad.offsetTop < windowBottom + 200) {
+      loadAd(ad);
+    }
+  });
+}
+
+window.addEventListener('scroll', lazyLoadAds);
+window.addEventListener('resize', lazyLoadAds);
+window.addEventListener('load', lazyLoadAds);
 
 // Calculators
 function calculateEarnings() {
@@ -266,20 +304,18 @@ articleMetaData.forEach((article, i) => {
 </script>
 
 <style>
-/* Article styling */
 .article-card {
   margin-bottom: 30px;
   padding: 15px;
   border-bottom: 1px solid #ddd;
 }
 
-/* Ad container styling */
 .ad-container {
   margin: 20px auto;
   text-align: center;
+  min-height: 250px; /* placeholder space */
 }
 
-/* Responsive for mobile */
 @media screen and (max-width: 768px) {
   .ad-container iframe {
     width: 100% !important;
@@ -287,6 +323,9 @@ articleMetaData.forEach((article, i) => {
   }
 }
 </style>
+
+
+
 
 
 <script>
@@ -315,6 +354,7 @@ l.parentNode.insertBefore(s, l);
 </script>
 </body>
 </html>
+
 
 
 
